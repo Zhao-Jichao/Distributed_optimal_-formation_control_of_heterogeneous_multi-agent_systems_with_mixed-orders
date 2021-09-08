@@ -1,0 +1,2 @@
+# Distributed_optimal_-formation_control_of_heterogeneous_multi-agent_systems_with_mixed-orders
+异构混合阶多智能体系统编队控制的分布式优化
