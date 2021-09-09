@@ -87,10 +87,10 @@ B = blkdiag(BG, BA);
 
 % Optimal matrixes
 syms kg1 kg2 kg3 kg4 real
-KG = [kg1   0  kg2   0
+KG = -[kg1   0  kg2   0
         0 kg3    0 kg4];
 syms ka1 ka2 ka3 ka4 ka5 ka6 ka7 ka8 ka9 ka10 ka11 ka12 real
-KA = [ka1  0  0  ka2  0  0  ka3  0  0  ka4  0  0
+KA = -[ka1  0  0  ka2  0  0  ka3  0  0  ka4  0  0
       0  ka5  0  0  ka6  0  0  ka7  0  0  ka8  0
       0  0  ka9  0  0  ka10 0  0  ka11 0  0  ka12];
 
@@ -107,20 +107,20 @@ MAG = [mAG  zeros(3,2)
 
 % Control input
 UGl = ...
-kron(eye(MG),KG) * kron(-LGlGl, eye(4)) * dGl +...
-kron(eye(MG),KG) * kron(-LGlAl, eye(4)) * kron(eye(MA), MGA) * dAl;
+kron(eye(MG),KG) * kron(LGlGl, eye(4)) * dGl +...
+kron(eye(MG),KG) * kron(LGlAl, eye(4)) * kron(eye(MA), MGA) * dAl;
 
 UGf = ...
-kron(eye(NG-MG),KG) * kron(-LGfGl, eye(4)) * dGl +...
-kron(eye(NG-MG),KG) * kron(-LGfGf, eye(4)) * dGf;
+kron(eye(NG-MG),KG) * kron(LGfGl, eye(4)) * dGl +...
+kron(eye(NG-MG),KG) * kron(LGfGf, eye(4)) * dGf;
 
 UAl = ...
-kron(eye(MA),KA) * kron(-LAlGl, eye(12)) * kron(eye(MG), MAG) * dGl +...
-kron(eye(MA),KA) * kron(-LAlAl, eye(12)) * dAl;
+kron(eye(MA),KA) * kron(LAlGl, eye(12)) * kron(eye(MG), MAG) * dGl +...
+kron(eye(MA),KA) * kron(LAlAl, eye(12)) * dAl;
 
 UAf = ...
-kron(eye(NA-MA),KA) * kron(-LAfAl, eye(12)) * dAl +...
-kron(eye(NA-MA),KA) * kron(-LAfAf, eye(12)) * dAf;
+kron(eye(NA-MA),KA) * kron(LAfAl, eye(12)) * dAl +...
+kron(eye(NA-MA),KA) * kron(LAfAf, eye(12)) * dAf;
 
 Ud = [UGl'  UGf'  UAl'  UAf']';
 
